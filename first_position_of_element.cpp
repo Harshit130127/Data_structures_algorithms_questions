@@ -22,7 +22,13 @@ void binary_search_first_position(int arr[], int n, int key) {   // to perform b
         }
     }
     
-    cout << "Element not found in the array." << endl;
+    if(first== -1){
+         cout << "Element not found in the array." << endl;
+        }
+
+    else{
+        cout << "First position of element is at index: " << last << endl;
+}
 }
 
 
