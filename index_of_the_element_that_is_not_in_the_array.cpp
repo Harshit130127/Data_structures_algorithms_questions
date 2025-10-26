@@ -15,45 +15,53 @@ void binary_search_to_find_the_index_of_the_element_that_is_not_in_the_array(int
         }
 
 
+    else if (arr[mid] > key) {
 
-        else if (arr[mid]>key){   // if key is less than mid element
-                
-            if(arr[mid-1]>key)   // if key is also less than mid-1 element
-            end=mid-1;
-
-
-            else if(arr[mid-1]==key){   // if key is equal to mid-1 element
-            cout<<"Element is already present in the array at index "<<mid-1<<endl;
-            return;
-            }
-
-            else{  // if key is greater than mid-1 element
-            cout<<"element can be fixed at index"<<endl<<mid-1;
-            return;}
-
-        }
-
-        else if (arr[mid]<key){   // if key is greater than mid element 
-
-            if(arr[mid+1]<key)   // if key is also greater than mid+1 element
-            start=mid+1;
-
-            else if(arr[mid+1]==key){  // if key is equal to mid+1 element
-
-            cout<<"Element is already present in the array at index "<<mid+1<<endl;
-            return;
-            }
-
-
-            else{   // if key is less than mid+1 element
-            cout<<"element can be fixed at index"<<endl<<mid+1;
-            return;}
-
-
-        }
+    if (mid == 0) {  // mid-1 does not exist
+        cout << "element can be fixed at index 0" << endl;
+        return;
     }
 
+    if(arr[mid-1] > key)
+        end = mid - 1;
+
+    else if(arr[mid-1] == key) {
+        cout << "Element is already present in the array at index " << mid-1 << endl;
+        return;
+    }
+
+    else {
+        cout << "element can be fixed at index " << mid << endl;
+        return;
+    }
 }
+
+
+        else if (arr[mid] < key) {
+
+    if (mid == n-1) {  // mid+1 does not exist
+        cout << "element can be fixed at index " << n << endl;
+        return;
+    }
+
+    if(arr[mid+1] < key)
+        start = mid + 1;
+
+    else if(arr[mid+1] == key) {
+        cout << "Element is already present in the array at index " << mid+1 << endl;
+        return;
+    }
+
+    else {
+        cout << "element can be fixed at index " << mid+1 << endl;
+        return;
+    }
+}
+
+    }
+}
+
+
 
 
 int main(){
