@@ -1,37 +1,64 @@
 #include<iostream>
 
-using namespace std;
+using namespace std; 
 
-void peak_index_using_binary_search(int arr[],int n){
+int peak_index_using_binary_search(int arr[],int n){  // function to find peak index using binary search
 
 int start=0;
 int end=n-1;
-
+int index=-1;
 while(start<=end){
 
-int mid=(start+(start-end))/2;
+int mid=(start+end)/2;
+
+if(mid==0 || mid==n-1){   // edge case when mid is at the start or end of the array
+    cout<<"no peak index found"<<endl;
+    return -1;
+}
+
+else if (arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1]){   // condition for peak index
 
 
-if (arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1]){
-
-
-    cout<<"the peak index is"<<mid<<endl;
+    cout<<"the peak index is"<<endl;
+    index=mid;
+    return mid ;
 
 }
 
 
-else if (arr[mid]<arr[mid-1]){
+else if (arr[mid]<arr[mid-1]){ // move towards left side if arr[mid] is less than arr[mid-1]
 
     end=mid-1;
 }
 
-else if (arr[mid]<arr[mid+1]){
+else if (arr[mid]<arr[mid+1]){   // move towards right side if arr[mid] is less than arr[mid+1]
     start=mid+1;
 }
 
 }
 
+return index;
+
+}
 
 
+int main (){
+
+int arr[1000];
+int n;  //size of the array
+
+cout<<"enter the size of the array"<<endl;
+cin>>n;
+
+cout<<"enter the elements of the array"<<endl;
+for(int i=0;i<n;i++){
+    cin>>arr[i];
+}
+
+
+
+int peak_index=peak_index_using_binary_search(arr,n);
+
+cout<<peak_index<<endl;
 
 }
