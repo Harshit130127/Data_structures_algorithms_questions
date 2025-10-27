@@ -10,22 +10,22 @@ int peak_index_using_binary_search(int arr[], int n){
 
         int mid = (start + end) / 2;
 
-        if(mid > 0 && mid < n - 1){
+        if(mid > 0 && mid < n - 1){   // to ensure mid-1 and mid+1 are valid indices
 
-            if(arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]){
+            if(arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]){  // peak element found
                 cout << "the peak index is" << endl;
                 return mid;
             }
-            else if(arr[mid] < arr[mid - 1]){
+            else if(arr[mid] < arr[mid - 1]){  // move to the left side
                 end = mid - 1;
             }
-            else {
+            else {    // move to the right side
                 start = mid + 1;
             }
         }
         else {
-            if(mid == 0) start = mid + 1;
-            else end = mid - 1;
+            if(mid == 0) start = mid + 1;  // it means mid+1 exists and mid-1 does not exist,so move to right side
+            else end = mid - 1; //  it means mid-1 exists and mid+1 does not exist,so move to left side
         }
     }
 
@@ -48,5 +48,5 @@ int main(){
     int peak_index = peak_index_using_binary_search(arr, n);
     cout << peak_index << endl;
 
-    return 0;
+
 }
