@@ -7,7 +7,7 @@ int findMinPages(int arr[], int k, int n) {
     int start = arr[0], end = 0;
     for(int i = 0; i < n; i++) {  // calculate total pages and max pages
         end += arr[i];
-
+ 
         if(arr[i] > start) {
             start = arr[i];
         }
