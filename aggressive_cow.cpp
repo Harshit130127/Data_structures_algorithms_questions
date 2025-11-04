@@ -1,63 +1,45 @@
 #include <iostream>
+#include <algorithm> // for sort()
 using namespace std;
 
-// Function to manually sort stall positions (Bubble Sort)
-void sortStalls(int stalls[], int totalStalls) {
-    for (int i = 0; i < totalStalls - 1; i++) {
-        for (int j = 0; j < totalStalls - i - 1; j++) {
-            if (stalls[j] > stalls[j + 1]) {
-                int temp = stalls[j];
-                stalls[j] = stalls[j + 1];
-                stalls[j + 1] = temp;
+int getMaxMinDistance(int stalls[], int n, int k) {
+    sort(stalls, stalls + n); // sort the stall positions
+
+    int start = 1;
+    int end = stalls[n - 1] - stalls[0];
+    int mid, ans = 0;
+
+    while (start <= end) {
+        mid = start + (end - start) / 2;
+
+        int count = 1;        // first cow placed at first stall
+        int pos = stalls[0];  // last placed cow position
+
+        for (int i = 1; i < n; i++) {
+            if (pos + mid <= stalls[i]) {
+                count++;         // place next cow
+                pos = stalls[i]; // update last position
             }
         }
-    }
-}
 
-// Function to check if cows can be placed with at least 'minDistance' between them
-bool canPlaceAllCows(int stalls[], int totalStalls, int totalCows, int minDistance) {
-    int cowsPlaced = 1;                 // place first cow in the first stall
-    int lastPlacedPosition = stalls[0]; // position of last placed cow
-
-    for (int i = 1; i < totalStalls; i++) {
-        if (stalls[i] - lastPlacedPosition >= minDistance) {
-            cowsPlaced++;
-            lastPlacedPosition = stalls[i];
-        }
-        if (cowsPlaced == totalCows)    // successfully placed all cows
-            return true;
-    }
-    return false; // can not place all cows with this distance
-}
-
-// Function to find the largest minimum distance between cows
-int getMaxMinDistance(int stalls[], int totalStalls, int totalCows) {
-    sortStalls(stalls, totalStalls); // sort the stalls in ascending order
-
-    int left = 1;                               // smallest possible distance
-    int right = stalls[totalStalls - 1] - stalls[0]; // largest possible distance
-    int bestDistance = 0;
-
-    while (left <= right) {
-        int midDistance = (left + right) / 2;
-
-        if (canPlaceAllCows(stalls, totalStalls, totalCows, midDistance)) {
-            bestDistance = midDistance;   // possible answer
-            left = midDistance + 1;       // try for a larger distance
+        if (count < k) {
+            end = mid - 1; // not enough cows could be placed
         } else {
-            right = midDistance - 1;      // try for a smaller distance
+            ans = mid;     // possible answer
+            start = mid + 1; // try for larger distance
         }
     }
-    return bestDistance;
+
+    return ans;
 }
 
 int main() {
     int stalls[] = {1, 2, 8, 4, 9};
-    int totalStalls = 5;
-    int totalCows = 3;
+    int n = 5;
+    int k = 3; // number of cows
 
-    int answer = getMaxMinDistance(stalls, totalStalls, totalCows);
-    cout << "Largest minimum distance between cows: " << answer << endl;
+    int result = getMaxMinDistance(stalls, n, k);
+    cout << "Largest minimum distance between cows: " << result << endl;
 
     return 0;
 }
