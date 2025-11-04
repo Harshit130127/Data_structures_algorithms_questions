@@ -41,5 +41,4 @@ int main() {
     int result = getMaxMinDistance(stalls, n, k);
     cout << "Largest minimum distance between cows: " << result << endl;
 
-    return 0;
 }
