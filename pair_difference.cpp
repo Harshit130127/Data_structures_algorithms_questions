@@ -33,6 +33,7 @@ int main (){
     cout<<"Enter the size of array and the difference value: ";
     cin>>n>>k;
 
+    cout<<"Enter the elements of the array: ";
     int arr[n];
     for(int i=0;i<n;i++){
         cin>>arr[i];
