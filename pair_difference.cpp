@@ -40,6 +40,4 @@ int main (){
 
     pairDifference(arr,n,k);
 
-
-    return 0;
 }
